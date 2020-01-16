@@ -5,9 +5,12 @@
 # Fewest commands are the goal
 
 from collections import defaultdict
+from typing import List
 
 
-def pleaseConformMy(caps):
+def pleaseConformMy(caps_input: List[str]):
+    caps: List[str] = caps_input.copy()
+    
     caps.append('end')
     
     interval_count = defaultdict(int)
@@ -34,8 +37,9 @@ def pleaseConformMy(caps):
     print()
 
 
-def pleaseConform(caps):
-    # Initialization
+def pleaseConform(caps_input: List[str]):
+    caps: List[str] = caps_input.copy()
+    
     start = 0
     forward = 0
     backward = 0
@@ -73,8 +77,9 @@ def pleaseConform(caps):
                   'through', t[1], 'flip your caps!')
 
 
-def pleaseConformOpt(caps):
-    # Initialization
+def pleaseConformOpt(caps_input: List[str]):
+    caps: List[str] = caps_input.copy()
+    
     start = 0
     forward = 0
     backward = 0
@@ -104,7 +109,9 @@ def pleaseConformOpt(caps):
             print('People in positions', t[0], 'through', t[1], 'flip your caps!')
 
 
-def pleaseConformOnepass(caps):
+def pleaseConformOnepass(caps_input: List[str]):
+    caps: List[str] = caps_input.copy()
+    
     caps = caps + [caps[0]]
     for i in range(1, len(caps)):
         if caps[i] != caps[i - 1]:
@@ -114,7 +121,9 @@ def pleaseConformOnepass(caps):
                 print(' through', i - 1, 'flip your caps!')
 
 
-def pleaseConformExercise(caps):
+def pleaseConformExercise(caps_input: List[str]):
+    caps: List[str] = caps_input.copy()
+    
     # Initialization
     start = 0
     forward = 0
@@ -155,12 +164,27 @@ def pleaseConformExercise(caps):
                 print('People in positions', t[0], 'through', t[1], 'flip your caps!')
 
 
+def solution_print(pleaseConformFunction, *caps: List[str]):
+    print(pleaseConformFunction.__name__)
+    print()
+    for cap in caps:
+        print(*cap)
+        pleaseConformFunction(cap)
+        print()
+    print('-' * 50)
+
+
 def main() -> None:
     caps1 = ['F', 'F', 'B', 'B', 'B', 'F', 'B', 'B', 'B', 'F', 'F', 'B', 'F']
     caps2 = ['F', 'F', 'B', 'B', 'B', 'F', 'B', 'B', 'B', 'F', 'F', 'F', 'F']
     
-    pleaseConform(caps1)
-    pleaseConform(caps2)
+    caps = caps1, caps2
+    
+    solution_print(pleaseConformMy, *caps)
+    solution_print(pleaseConform, *caps)
+    solution_print(pleaseConformOpt, *caps)
+    solution_print(pleaseConformOnepass, *caps)
+    solution_print(pleaseConformExercise, *caps)
 
 
 if __name__ == '__main__':
