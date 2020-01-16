@@ -5,10 +5,10 @@
 # Fewest commands are the goal
 
 from collections import defaultdict
-from typing import List
+from typing import List, Tuple
 
 
-def pleaseConformMy(caps_input: List[str]):
+def please_conform_my(caps_input: List[str]):
     caps: List[str] = caps_input.copy()
     
     caps.append('end')
@@ -30,86 +30,53 @@ def pleaseConformMy(caps_input: List[str]):
         if cap_current != cap_min:
             if cap_previous == cap_min:
                 index_end = index_current - 1
-                print(f'People in positions {index_start} through {index_end} flip your caps!')
+                if index_end == index_start:
+                    print(f'Person at position {index_start} flip your cap!')
+                else:
+                    print(f'People in positions {index_start} through {index_end} flip your caps!')
             index_start = index_current + 1
         
         cap_previous = cap_current
-    print()
 
 
-def pleaseConform(caps_input: List[str]):
+def please_conform(caps_input: List[str]):
     caps: List[str] = caps_input.copy()
     
-    start = 0
-    forward = 0
-    backward = 0
-    intervals = []
+    # So we don't need to add the last interval after for loop completes execution
+    caps.append('end')
+    
+    intervals: List[Tuple[int, int, str]] = list()
+    count_forward: int = 0
+    count_backward: int = 0
+    index_previous: int = 0
     
     # Determine intervals where caps are on in the same direction
-    for i in range(1, len(caps)):
-        if caps[start] != caps[i]:
-            # each interval is a tuple with 3 elements (start, end, type)
-            intervals.append((start, i - 1, caps[start]))
+    for index_current in range(1, len(caps)):
+        if caps[index_previous] != caps[index_current]:
+            intervals.append((index_previous, index_current - 1, caps[index_previous]))
             
-            if caps[start] == 'F':
-                forward += 1
+            if caps[index_previous] == 'F':
+                count_forward += 1
             else:
-                backward += 1
-            start = i
+                count_backward += 1
+            index_previous = index_current
     
-    # Need to add the last interval after for loop completes execution
-    intervals.append((start, len(caps) - 1, caps[start]))
-    if caps[start] == 'F':
-        forward += 1
+    if count_forward < count_backward:
+        cap_to_flip = 'F'
     else:
-        backward += 1
+        cap_to_flip = 'B'
     
-    ##    print (intervals)
-    ##    print (forward, backward)
-    if forward < backward:
-        flip = 'F'
-    else:
-        flip = 'B'
-    for t in intervals:
-        if t[2] == flip:
-            # Exercise: if t[0] == t[1] change the printing!
-            print('People in positions', t[0],
-                  'through', t[1], 'flip your caps!')
-
-
-def pleaseConformOpt(caps_input: List[str]):
-    caps: List[str] = caps_input.copy()
-    
-    start = 0
-    forward = 0
-    backward = 0
-    intervals = []
-    
-    caps = caps + ['END']
-    
-    # Determine intervals where caps are on in the same direction
-    for i in range(1, len(caps)):
-        if caps[start] != caps[i]:
-            # each interval is a tuple with 3 elements (start, end, type)
-            intervals.append((start, i - 1, caps[start]))
-            
-            if caps[start] == 'F':
-                forward += 1
+    for interval in intervals:
+        cap_current = interval[2]
+        if cap_current == cap_to_flip:
+            # Exercise: if interval[0] == interval[1] change the printing!
+            if interval[0] == interval[1]:
+                print('Person at position', interval[0], 'flip your cap!')
             else:
-                backward += 1
-            start = i
-    
-    if forward < backward:
-        flip = 'F'
-    else:
-        flip = 'B'
-    for t in intervals:
-        if t[2] == flip:
-            # Exercise: if t[0] == t[1] change the printing!
-            print('People in positions', t[0], 'through', t[1], 'flip your caps!')
+                print('People in positions', interval[0], 'through', interval[1], 'flip your caps!')
 
 
-def pleaseConformOnepass(caps_input: List[str]):
+def please_conform_one_pass(caps_input: List[str]):
     caps: List[str] = caps_input.copy()
     
     caps = caps + [caps[0]]
@@ -119,49 +86,6 @@ def pleaseConformOnepass(caps_input: List[str]):
                 print('People in positions', i, end = '')
             else:
                 print(' through', i - 1, 'flip your caps!')
-
-
-def pleaseConformExercise(caps_input: List[str]):
-    caps: List[str] = caps_input.copy()
-    
-    # Initialization
-    start = 0
-    forward = 0
-    backward = 0
-    intervals = []
-    
-    # Determine intervals where caps are on in the same direction
-    for i in range(len(caps)):
-        if caps[start] != caps[i]:
-            # each interval is a tuple with 3 elements (start, end, type)
-            intervals.append((start, i - 1, caps[start]))
-            
-            if caps[start] == 'F':
-                forward += 1
-            else:
-                backward += 1
-            start = i
-    
-    # Need to add the last interval after for loop completes execution
-    intervals.append((start, len(caps) - 1, caps[start]))
-    if caps[start] == 'F':
-        forward += 1
-    else:
-        backward += 1
-    
-    ##    print (intervals)
-    ##    print (forward, backward)
-    if forward < backward:
-        flip = 'F'
-    else:
-        flip = 'B'
-    for t in intervals:
-        if t[2] == flip:
-            # Exercise: if t[0] == t[1] change the printing!
-            if t[0] == t[1]:
-                print('Person at position', t[0], 'flip your cap!')
-            else:
-                print('People in positions', t[0], 'through', t[1], 'flip your caps!')
 
 
 def solution_print(pleaseConformFunction, *caps: List[str]):
@@ -180,11 +104,9 @@ def main() -> None:
     
     caps = caps1, caps2
     
-    solution_print(pleaseConformMy, *caps)
-    solution_print(pleaseConform, *caps)
-    solution_print(pleaseConformOpt, *caps)
-    solution_print(pleaseConformOnepass, *caps)
-    solution_print(pleaseConformExercise, *caps)
+    solution_print(please_conform_my, *caps)
+    solution_print(please_conform, *caps)
+    solution_print(please_conform_one_pass, *caps)
 
 
 if __name__ == '__main__':
