@@ -107,7 +107,6 @@ def main() -> None:
     solution_print(please_conform, *caps)
     solution_print(please_conform_one_pass, *caps)
 
-                                                
 
 if __name__ == '__main__':
     main()
