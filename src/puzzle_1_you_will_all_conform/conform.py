@@ -97,6 +97,7 @@ def solution_print(pleaseConformFunction, *caps: List[str]):
     print('-' * 50)
 
 
+# comment
 def main() -> None:
     caps1 = ['F', 'F', 'B', 'B', 'B', 'F', 'B', 'B', 'B', 'F', 'F', 'B', 'F']
     caps2 = ['F', 'F', 'B', 'B', 'B', 'F', 'B', 'B', 'B', 'F', 'F', 'F', 'F']
