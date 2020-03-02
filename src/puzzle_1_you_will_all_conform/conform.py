@@ -78,7 +78,7 @@ def please_conform(caps_input: List[str]):
 def please_conform_one_pass(caps_input: List[str]):
     caps: List[str] = caps_input.copy()
 
-    caps = caps + [caps[0]]
+    caps.append(caps[0])
     for i in range(1, len(caps)):
         if caps[i] != caps[i - 1]:
             if caps[i] != caps[0]:
@@ -150,3 +150,6 @@ if __name__ == '__main__':
 # 1: ready
 # even: F or B
 # odd: second interval
+
+# TODO: functions with solutions dont print out solutions, but just returning special structure
+# TODO: tests for solution functions
