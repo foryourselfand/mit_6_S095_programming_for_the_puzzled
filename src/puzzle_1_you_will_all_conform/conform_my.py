@@ -1,39 +1,8 @@
 from typing import Callable, List, Tuple
 
 
-# def please_conform_my_old(caps_input: List[str]):
-#     caps: List[str] = caps_input.copy()
-#
-#     caps.append('end')
-#
-#     interval_count = defaultdict(int)
-#     cap_last = caps[0]
-#
-#     for cap_current in caps[1:]:
-#         if cap_current != cap_last:
-#             interval_count[cap_last] += 1
-#             cap_last = cap_current
-#
-#     interval_min = min(interval_count.items(), key=lambda item: item[1])
-#     cap_min = interval_min[0]
-#
-#     index_start = 0
-#     cap_previous = caps[0]
-#     for index_current, cap_current in enumerate(caps[1:], 1):
-#         if cap_current != cap_min:
-#             if cap_previous == cap_min:
-#                 index_end = index_current - 1
-#                 if index_end == index_start:
-#                     print(f'Person at position {index_start} flip your cap!')
-#                 else:
-#                     print(f'People in positions {index_start} through {index_end} flip your caps!')
-#             index_start = index_current + 1
-#
-#         cap_previous = cap_current
-
-
-def please_conform(caps_input: List[str]):
-    caps: List[str] = caps_input.copy()
+def please_conform(caps: List[str]):
+    caps: List[str] = caps.copy()
 
     caps.append('end')
 
@@ -72,8 +41,8 @@ def please_conform(caps_input: List[str]):
                 print('People in positions', interval_start, 'through', interval_end, 'flip your caps!')
 
 
-def please_conform_one_pass(caps_input: List[str]):
-    caps: List[str] = caps_input.copy()
+def please_conform_one_pass(caps: List[str]):
+    caps: List[str] = caps.copy()
 
     cap_first: str = caps[0]
     caps.append(cap_first)
