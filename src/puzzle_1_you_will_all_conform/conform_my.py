@@ -1,4 +1,10 @@
-from typing import Callable, List, Tuple
+from typing import Callable, List, NamedTuple
+
+
+class Interval(NamedTuple):
+    start: int
+    end: int
+    cap_type: str
 
 
 def please_conform(caps: List[str]):
@@ -6,7 +12,7 @@ def please_conform(caps: List[str]):
 
     caps.append('end')
 
-    intervals: List[Tuple[int, int, str]] = list()
+    intervals: List[Interval] = list()
     count_forward: int = 0
     count_backward: int = 0
     index_previous: int = 0
@@ -16,7 +22,10 @@ def please_conform(caps: List[str]):
         cap_previous = caps[index_previous]
 
         if cap_current != cap_previous:
-            intervals.append((index_previous, index_current - 1, caps[index_previous]))
+            interval = Interval(start=index_previous,
+                                end=index_current - 1,
+                                cap_type=cap_previous)
+            intervals.append(interval)
 
             if cap_previous == 'F':
                 count_forward += 1
@@ -31,14 +40,11 @@ def please_conform(caps: List[str]):
         cap_to_flip = 'B'
 
     for interval in intervals:
-        cap_type: str = interval[2]
-        if cap_type == cap_to_flip:
-            interval_start: int = interval[0]
-            interval_end: int = interval[1]
-            if interval_start == interval_end:
-                print('Person at position', interval_start, 'flip your cap!')
+        if interval.cap_type == cap_to_flip:
+            if interval.start == interval.end:
+                print('Person at position', interval.start, 'flip your cap!')
             else:
-                print('People in positions', interval_start, 'through', interval_end, 'flip your caps!')
+                print('People in positions', interval.start, 'through', interval.end, 'flip your caps!')
 
 
 def please_conform_one_pass(caps: List[str]):
@@ -46,6 +52,8 @@ def please_conform_one_pass(caps: List[str]):
 
     cap_first: str = caps[0]
     caps.append(cap_first)
+
+    interval_start: int = 0
     for index_current in range(1, len(caps)):
         index_previous = index_current - 1
 
@@ -54,9 +62,12 @@ def please_conform_one_pass(caps: List[str]):
 
         if cap_current != cap_previous:
             if cap_current != cap_first:
-                print('People in positions', index_current, end='')
+                interval_start = index_current
             else:
-                print(' through', index_previous, 'flip your caps!')
+                if index_previous == interval_start:
+                    print('Person at position', index_previous, 'flip your cap!')
+                else:
+                    print('People in positions', interval_start, 'through', index_previous, 'flip your caps!')
 
 
 def solution_print(please_conform_function: Callable, *caps: List[str]):
