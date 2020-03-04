@@ -5,6 +5,9 @@ from structures import Interval
 
 class SolutionPleaseConform:
     def please_conform(self, caps: List[str]) -> List[Interval]:
+        if len(caps) == 0:
+            return list()
+
         caps: List[str] = caps.copy()
 
         caps.append('end')

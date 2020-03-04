@@ -5,6 +5,9 @@ from structures import Interval
 
 class SolutionPleaseConformOnePass:
     def please_conform_one_pass(self, caps: List[str]) -> List[Interval]:
+        if len(caps) == 0:
+            return list()
+
         caps: List[str] = caps.copy()
 
         cap_first: str = caps[0]
