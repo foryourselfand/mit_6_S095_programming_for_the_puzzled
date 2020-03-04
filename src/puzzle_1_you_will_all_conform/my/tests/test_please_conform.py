@@ -1,7 +1,7 @@
 from typing import List
 from unittest import TestCase
 
-from conform_my import SolutionPleaseConform
+from please_conform import SolutionPleaseConform
 
 
 class TestSolutionPleaseConform(TestCase):
