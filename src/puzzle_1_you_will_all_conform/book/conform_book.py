@@ -63,11 +63,12 @@ def pleaseConformOnepass(caps):
                 print(' through', i - 1, 'flip your caps!')
 
 
-# pleaseConform(caps1)
-# pleaseConform(caps2)
+pleaseConform(caps1)
+print()
+pleaseConform(caps2)
 #
 # pleaseConformOptimized(caps1)
 # pleaseConformOptimized(caps2)
-
-pleaseConformOnepass(caps1)
-pleaseConformOnepass(caps2)
+#
+# pleaseConformOnepass(caps1)
+# pleaseConformOnepass(caps2)
