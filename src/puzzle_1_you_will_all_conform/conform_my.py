@@ -7,71 +7,73 @@ class Interval(NamedTuple):
     cap_type: str
 
 
-def please_conform(caps: List[str]) -> List[Interval]:
-    caps: List[str] = caps.copy()
+class SolutionPleaseConform:
+    def please_conform(self, caps: List[str]) -> List[Interval]:
+        caps: List[str] = caps.copy()
 
-    caps.append('end')
+        caps.append('end')
 
-    interval_inputs: List[Interval] = list()
-    count_forward: int = 0
-    count_backward: int = 0
-    index_previous: int = 0
+        interval_inputs: List[Interval] = list()
+        count_forward: int = 0
+        count_backward: int = 0
+        index_previous: int = 0
 
-    for index_current in range(1, len(caps)):
-        cap_current = caps[index_current]
-        cap_previous = caps[index_previous]
+        for index_current in range(1, len(caps)):
+            cap_current = caps[index_current]
+            cap_previous = caps[index_previous]
 
-        if cap_current != cap_previous:
-            interval_input = Interval(start=index_previous,
-                                      end=index_current - 1,
-                                      cap_type=cap_previous)
-            interval_inputs.append(interval_input)
+            if cap_current != cap_previous:
+                interval_input = Interval(start=index_previous,
+                                          end=index_current - 1,
+                                          cap_type=cap_previous)
+                interval_inputs.append(interval_input)
 
-            if cap_previous == 'F':
-                count_forward += 1
-            else:
-                count_backward += 1
-            index_previous = index_current
+                if cap_previous == 'F':
+                    count_forward += 1
+                else:
+                    count_backward += 1
+                index_previous = index_current
 
-    cap_to_flip: str
-    if count_forward < count_backward:
-        cap_to_flip = 'F'
-    else:
-        cap_to_flip = 'B'
+        cap_to_flip: str
+        if count_forward < count_backward:
+            cap_to_flip = 'F'
+        else:
+            cap_to_flip = 'B'
 
-    interval_results: List[Interval] = list()
+        interval_results: List[Interval] = list()
 
-    for interval_input in interval_inputs:
-        if interval_input.cap_type == cap_to_flip:
-            interval_result: Interval = interval_input
-            interval_results.append(interval_result)
+        for interval_input in interval_inputs:
+            if interval_input.cap_type == cap_to_flip:
+                interval_result: Interval = interval_input
+                interval_results.append(interval_result)
 
-    return interval_results
+        return interval_results
 
 
-def please_conform_one_pass(caps: List[str]) -> List[Interval]:
-    caps: List[str] = caps.copy()
+class SolutionPleaseConformOnePass:
+    def please_conform_one_pass(self, caps: List[str]) -> List[Interval]:
+        caps: List[str] = caps.copy()
 
-    cap_first: str = caps[0]
-    caps.append(cap_first)
+        cap_first: str = caps[0]
+        caps.append(cap_first)
 
-    interval_results: List[Interval] = list()
-    interval_start: int = 0
+        interval_results: List[Interval] = list()
+        interval_start: int = 0
 
-    for index_current in range(1, len(caps)):
-        index_previous = index_current - 1
+        for index_current in range(1, len(caps)):
+            index_previous = index_current - 1
 
-        cap_current: str = caps[index_current]
-        cap_previous: str = caps[index_previous]
+            cap_current: str = caps[index_current]
+            cap_previous: str = caps[index_previous]
 
-        if cap_current != cap_previous:
-            if cap_current != cap_first:
-                interval_start = index_current
+            if cap_current != cap_previous:
+                if cap_current != cap_first:
+                    interval_start = index_current
 
-            interval_result = Interval(interval_start, index_previous, cap_previous)
-            interval_results.append(interval_result)
+                interval_result = Interval(interval_start, index_previous, cap_previous)
+                interval_results.append(interval_result)
 
-    return interval_results
+        return interval_results
 
 
 # def solution_print(please_conform_function: Callable, *caps: List[str]):
@@ -89,8 +91,8 @@ def main() -> None:
 
     caps = caps1, caps2
 
-    solution1 = please_conform(caps1)
-    solution2 = please_conform(caps2)
+    solution1 = SolutionPleaseConform().please_conform(caps1)
+    solution2 = SolutionPleaseConform().please_conform(caps2)
 
     print(f'{solution1=}')
     print(f'{solution2=}')
