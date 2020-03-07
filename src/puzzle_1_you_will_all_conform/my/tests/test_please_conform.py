@@ -18,6 +18,9 @@ class TestPleaseConform(TestCase):
     def get_solution(self) -> PleaseConform:
         return PleaseConformSquared()
 
+    def get_random_number(self) -> int:
+        return random.randrange(1, 42)
+
     def test_empty(self):
         caps: List[str] = list()
 
@@ -29,7 +32,7 @@ class TestPleaseConform(TestCase):
 
     def test_single(self):
         for cap in self.caps:
-            caps: List[str] = [cap for _ in range(random.randrange(1, 42))]
+            caps: List[str] = [cap for _ in range(self.get_random_number())]
 
             expected_result = list()
 
@@ -41,12 +44,18 @@ class TestPleaseConform(TestCase):
         border_cap: str = self.caps.pop()
         middle_cap: str = self.caps.pop()
 
-        caps: List[str] = list()
-        caps += [border_cap for _ in range(3)]
-        caps += [middle_cap for _ in range(1)]
-        caps += [border_cap for _ in range(3)]
+        border_count_left: int = self.get_random_number()
+        border_count_right: int = self.get_random_number()
+        middle_count: int = self.get_random_number()
 
-        expected_result: List[Interval] = [Interval(3, 3, middle_cap)]
+        caps: List[str] = list()
+        caps += [border_cap for _ in range(border_count_left)]
+        caps += [middle_cap for _ in range(middle_count)]
+        caps += [border_cap for _ in range(border_count_right)]
+
+        expected_result: List[Interval] = [Interval(start=border_count_left,
+                                                    end=border_count_left + middle_count - 1,
+                                                    cap_type=middle_cap)]
 
         actual_result = self.solution.please_conform(caps)
 
