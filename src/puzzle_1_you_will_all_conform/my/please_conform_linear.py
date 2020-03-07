@@ -26,8 +26,8 @@ class PleaseConformLinear(PleaseConform):
             if cap_current != cap_previous:
                 if cap_current != cap_first:
                     interval_start = index_current
-
-                interval_result = Interval(interval_start, index_previous, cap_previous)
-                interval_results.append(interval_result)
+                else:
+                    interval_result = Interval(interval_start, index_previous, cap_previous)
+                    interval_results.append(interval_result)
 
         return interval_results
