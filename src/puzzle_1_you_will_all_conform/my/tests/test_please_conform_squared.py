@@ -14,7 +14,7 @@ class TestPleaseConformSquared(TestCase):
         expected_result = list()
         expected_result_len = 0
 
-        actual_result = self.solution.please_conform_squared(caps)
+        actual_result = self.solution.please_conform(caps)
         actual_result_len = len(actual_result)
 
         self.assertEqual(expected_result, actual_result)

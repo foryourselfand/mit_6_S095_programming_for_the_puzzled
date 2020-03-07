@@ -1,10 +1,11 @@
 from typing import List
 
+from please_conform import PleaseConform
 from structures import Interval
 
 
-class PleaseConformSquared:
-    def please_conform_squared(self, caps: List[str]) -> List[Interval]:
+class PleaseConformSquared(PleaseConform):
+    def please_conform(self, caps: List[str]) -> List[Interval]:
         if len(caps) == 0:
             return list()
 
@@ -55,15 +56,15 @@ def main() -> None:
 
     caps = caps1, caps2
 
-    solution1 = PleaseConformSquared().please_conform_squared(caps1)
-    solution2 = PleaseConformSquared().please_conform_squared(caps2)
+    solution1 = PleaseConformSquared().please_conform(caps1)
+    solution2 = PleaseConformSquared().please_conform(caps2)
 
     print(f'{solution1=}')
     print(f'{solution2=}')
 
     # solution_print(please_conform_my_old, *caps)
-    # solution_print(please_conform_squared, *caps)
-    # solution_print(please_conform_linear, *caps)
+    # solution_print(please_conform, *caps)
+    # solution_print(please_conform, *caps)
 
 
 if __name__ == '__main__':

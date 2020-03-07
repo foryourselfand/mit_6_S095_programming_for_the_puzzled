@@ -1,10 +1,11 @@
 from typing import List
 
+from please_conform import PleaseConform
 from structures import Interval
 
 
-class PleaseConformLinear:
-    def please_conform_linear(self, caps: List[str]) -> List[Interval]:
+class PleaseConformLinear(PleaseConform):
+    def please_conform(self, caps: List[str]) -> List[Interval]:
         if len(caps) == 0:
             return list()
 
