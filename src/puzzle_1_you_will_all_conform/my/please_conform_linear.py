@@ -3,8 +3,8 @@ from typing import List
 from structures import Interval
 
 
-class SolutionPleaseConformLinear:
-    def please_conform_one_pass(self, caps: List[str]) -> List[Interval]:
+class PleaseConformLinear:
+    def please_conform_linear(self, caps: List[str]) -> List[Interval]:
         if len(caps) == 0:
             return list()
 

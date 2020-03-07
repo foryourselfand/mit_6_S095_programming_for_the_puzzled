@@ -1,12 +1,12 @@
 from typing import List
 from unittest import TestCase
 
-from please_conform_linear import SolutionPleaseConformLinear
+from please_conform_linear import PleaseConformLinear
 
 
-class TestSolutionPleaseConformLinear(TestCase):
+class TestPleaseConformLinear(TestCase):
     def setUp(self) -> None:
-        self.solution = SolutionPleaseConformLinear()
+        self.solution = PleaseConformLinear()
 
     def test_empty(self):
         caps: List[str] = list()
@@ -14,7 +14,7 @@ class TestSolutionPleaseConformLinear(TestCase):
         expected_result = list()
         expected_result_len = 0
 
-        actual_result = self.solution.please_conform_one_pass(caps)
+        actual_result = self.solution.please_conform_linear(caps)
         actual_result_len = len(actual_result)
 
         self.assertEqual(expected_result, actual_result)
