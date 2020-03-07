@@ -10,7 +10,7 @@ def main() -> None:
     # solution2 = PleaseConformSquared().please_conform(caps2)
 
     caps = ['F', 'F', 'F', 'B', 'F', 'F', 'F']
-    solution = PleaseConformLinear().please_conform(caps)
+    solution = PleaseConformSquared().please_conform(caps)
 
     print(f'{solution=}')
 

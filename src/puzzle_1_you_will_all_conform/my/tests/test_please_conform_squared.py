@@ -1,8 +1,7 @@
-from unittest import TestCase
-
 from please_conform_squared import PleaseConformSquared
+from test_please_conform import TestPleaseConform
 
 
-class TestPleaseConformSquared(TestCase):
-    def setUp(self) -> None:
-        self.solution = PleaseConformSquared()
+class TestPleaseConformSquared(TestPleaseConform):
+    def get_solution(self):
+        return PleaseConformSquared()

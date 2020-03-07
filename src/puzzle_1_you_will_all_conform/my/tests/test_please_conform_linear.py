@@ -1,8 +1,7 @@
-from unittest import TestCase
-
 from please_conform_linear import PleaseConformLinear
+from test_please_conform import TestPleaseConform
 
 
-class TestPleaseConformLinear(TestCase):
-    def setUp(self) -> None:
-        self.solution = PleaseConformLinear()
+class TestPleaseConformLinear(TestPleaseConform):
+    def get_solution(self):
+        return PleaseConformLinear()
