@@ -9,10 +9,12 @@ def main() -> None:
     # solution1 = PleaseConformSquared().please_conform(caps1)
     # solution2 = PleaseConformSquared().please_conform(caps2)
 
-    caps = ['F', 'F', 'F', 'B', 'F', 'F', 'F']
-    solution = PleaseConformSquared().please_conform(caps)
+    caps = ['B', 'F']
+    solution1 = PleaseConformSquared().please_conform(caps)
+    solution2 = PleaseConformLinear().please_conform(caps)
 
-    print(f'{solution=}')
+    print(f'{solution1=}')
+    print(f'{solution2=}')
 
 
 if __name__ == '__main__':

@@ -24,23 +24,24 @@ class TestPleaseConform(TestCase):
     def test_empty(self):
         caps: List[str] = list()
 
-        expected_result = list()
+        result_expected = list()
 
-        actual_result = self.solution.please_conform(caps)
+        result_actual = self.solution.please_conform(caps)
 
-        self.assertEqual(expected_result, actual_result)
+        self.assertEqual(result_expected, result_actual)
 
     def test_single(self):
         for cap in self.caps:
             caps: List[str] = [cap for _ in range(self.get_random_number())]
 
-            expected_result = list()
+            result_expected = list()
 
-            actual_result = self.solution.please_conform(caps)
+            result_actual = self.solution.please_conform(caps)
 
-            self.assertEqual(expected_result, actual_result)
+            self.assertEqual(result_expected, result_actual)
 
     def test_middle(self):
+        print(len(self.caps))
         border_cap: str = self.caps.pop()
         middle_cap: str = self.caps.pop()
 
@@ -53,10 +54,10 @@ class TestPleaseConform(TestCase):
         caps += [middle_cap for _ in range(middle_count)]
         caps += [border_cap for _ in range(border_count_right)]
 
-        expected_result: List[Interval] = [Interval(start=border_count_left,
+        result_expected: List[Interval] = [Interval(start=border_count_left,
                                                     end=border_count_left + middle_count - 1,
                                                     cap_type=middle_cap)]
 
-        actual_result = self.solution.please_conform(caps)
+        result_actual = self.solution.please_conform(caps)
 
-        self.assertEqual(expected_result, actual_result)
+        self.assertEqual(result_expected, result_actual)
