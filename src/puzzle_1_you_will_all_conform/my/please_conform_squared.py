@@ -3,7 +3,7 @@ from typing import List
 from structures import Interval
 
 
-class SolutionPleaseConform:
+class SolutionPleaseConformSquared:
     def please_conform(self, caps: List[str]) -> List[Interval]:
         if len(caps) == 0:
             return list()
@@ -55,8 +55,8 @@ def main() -> None:
 
     caps = caps1, caps2
 
-    solution1 = SolutionPleaseConform().please_conform(caps1)
-    solution2 = SolutionPleaseConform().please_conform(caps2)
+    solution1 = SolutionPleaseConformSquared().please_conform(caps1)
+    solution2 = SolutionPleaseConformSquared().please_conform(caps2)
 
     print(f'{solution1=}')
     print(f'{solution2=}')
